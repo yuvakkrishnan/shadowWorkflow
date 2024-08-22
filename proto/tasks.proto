@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package shadow.tasks;
+
+option go_package = "proto/tasks";
+
+// Payload is the message type that is used to send data to the tasks and receive data from the processor.
+// The data field is a byte array that can be used to send any type of data to the tasks.
+message Payload {
+  bytes data = 1;
+}
+
+// Tasks is the service that is implemented by the tasks. Plugins will implement this service and register it with Shadow.
+service Tasks {
+  // Call is the method that is called by Shadow to send data to the tasks and receive data from the processor.
+  rpc Call(Payload) returns (Payload);
+}
